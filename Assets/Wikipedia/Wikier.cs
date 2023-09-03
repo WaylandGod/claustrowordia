@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using AnttiStarterKit.Extensions;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -119,7 +118,7 @@ namespace Wikipedia
         private static string FindSomeText(string text)
         {
             if (string.IsNullOrEmpty(text) || text.ToLower().Contains("redirect")) return null;
-            var lines = text.Split("\n");
+            var lines = text.Split('\n');
             return lines.Select(Clean).Where(line => line.Length > 3 && !line.Contains("==") && !line.Contains("(")).ToList().FirstOrDefault();
         }
 
@@ -246,16 +245,18 @@ namespace Wikipedia
 
         private static string CreateMD5(string input)
         {
-            using var md5 = System.Security.Cryptography.MD5.Create();
-            var inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-            var hashBytes = md5.ComputeHash(inputBytes);
-            
-            var sb = new StringBuilder();
-            foreach (var b in hashBytes)
-            {
-                sb.Append(b.ToString("X2"));
-            }
-            return sb.ToString();
+			using (var md5 = System.Security.Cryptography.MD5.Create())
+			{
+				var inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+				var hashBytes = md5.ComputeHash(inputBytes);
+
+				var sb = new StringBuilder();
+				foreach (var b in hashBytes)
+				{
+					sb.Append(b.ToString("X2"));
+				}
+				return sb.ToString();
+			}
         }
     }
 

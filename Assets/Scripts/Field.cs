@@ -39,8 +39,8 @@ public class Field : MonoBehaviour
 
     public bool Undoing => undoing;
 
-    private readonly TileGrid<Card> grid = new(7, 7);
-    private readonly List<WordMatch> words = new();
+    private readonly TileGrid<Card> grid = new TileGrid<Card>(7, 7);
+    private readonly List<WordMatch> words = new List<WordMatch>();
 
     private int move;
     private bool showingBoard;
@@ -106,15 +106,20 @@ public class Field : MonoBehaviour
 
     private string GetTutorialMessage(TutorialType message)
     {
-        return message switch
+        switch(message)
         {
-            TutorialType.Intro => "Drag (letters) to the board and (create words) in any direction.",
-            TutorialType.Undo => "You can (undo) your last move if you (slip) but you must replay the (same letter) again afterwards.",
-            TutorialType.FullMatch => "When (every letter) on the board is part of a word, you get (ten times) the scores.",
-            TutorialType.Reverse => "As you can see, (words) can even be formed (backwards)!",
-            TutorialType.End => "The game (ends) when the (board is full). So try to find ways to (prolong) the game so you can score more.",
-            _ => throw new ArgumentOutOfRangeException(nameof(message), message, null)
-        };
+			case TutorialType.Intro:
+				return "Drag (letters) to the board and (create words) in any direction.";
+            case TutorialType.Undo:
+				return "You can (undo) your last move if you (slip) but you must replay the (same letter) again afterwards.";
+            case TutorialType.FullMatch:
+				return "When (every letter) on the board is part of a word, you get (ten times) the scores.";
+            case TutorialType.Reverse:
+				return "As you can see, (words) can even be formed (backwards)!";
+            case TutorialType.End:
+				return "The game (ends) when the (board is full). So try to find ways to (prolong) the game so you can score more.";
+            default: throw new ArgumentOutOfRangeException(nameof(message), message, null);
+        }
     }
 
     public void ToggleBoardOrTwists()
@@ -375,7 +380,7 @@ public class Field : MonoBehaviour
 
         for (var x = 0; x < 7; x++)
         {
-            for (var y = index; y is < 7 and >= 0; y += diff)
+            for (var y = index; y < 7 && y >= 0; y += diff)
             {
                 var card = grid.Get(x, y + diff);
                 grid.Set(card, x, y);
@@ -409,7 +414,7 @@ public class Field : MonoBehaviour
 
         for (var y = 0; y < 7; y++)
         {
-            for (var x = index; x is < 7 and >= 0; x -= diff)
+            for (var x = index; x < 7 && x >= 0; x -= diff)
             {
                 var card = grid.Get(x - diff, y);
                 grid.Set(card, x, y);

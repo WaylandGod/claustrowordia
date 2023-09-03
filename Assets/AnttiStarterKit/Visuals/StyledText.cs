@@ -90,14 +90,19 @@ public class StyledText : MonoBehaviour
 
     private static string GetEffectTag(EffectType type)
     {
-        return type switch
+        switch(type)
         {
-            EffectType.Wobble => "wobble",
-            EffectType.Bounce => "bounce",
-            EffectType.Shake => "shake",
-            EffectType.Bulge => "bulge",
-            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
-        };
+			case EffectType.Wobble:
+				return "wobble";
+			case EffectType.Bounce:
+				return "bounce";
+            case EffectType.Shake:
+				return "shake";
+            case EffectType.Bulge:
+				return "bulge";
+			default:
+				throw new ArgumentOutOfRangeException(nameof(type), type, null);
+        }
     }
 
     private static string StripTags(string text)
@@ -225,14 +230,19 @@ public class TextEffect
 
     private Vector3 GetOffset(int index, float speed, float amount)
     {
-        return _type switch
-        {
-            EffectType.Wobble => Vector3.zero.WhereY(Mathf.Sin(Time.time * speed + index * 0.5f) * amount),
-            EffectType.Bounce => Vector3.zero.WhereY(Mathf.Abs(Mathf.Sin(Time.time * speed + index * 0.5f)) * amount),
-            EffectType.Shake => Vector3.zero.WhereY(Random.Range(-amount, amount)),
-            EffectType.Bulge => Vector3.zero, // not needed
-            _ => throw new ArgumentOutOfRangeException()
-        };
+        switch(_type)
+		{
+			case EffectType.Wobble:
+				return Vector3.zero.WhereY(Mathf.Sin(Time.time * speed + index * 0.5f) * amount);
+            case EffectType.Bounce:
+				return Vector3.zero.WhereY(Mathf.Abs(Mathf.Sin(Time.time * speed + index * 0.5f)) * amount);
+            case EffectType.Shake:
+				return Vector3.zero.WhereY(Random.Range(-amount, amount));
+            case EffectType.Bulge:
+				return Vector3.zero; // not needed
+            default :
+				throw new ArgumentOutOfRangeException();
+        }
     }
 }
 

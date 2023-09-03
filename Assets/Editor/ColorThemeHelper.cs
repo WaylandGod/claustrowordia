@@ -24,7 +24,8 @@ namespace Editor
 
         private void OnEnable()
         {
-            groups ??= new List<ThemeGroup>();
+			if(groups == null)
+            groups = new List<ThemeGroup>();
         }
 
         private void OnGUI()
@@ -89,13 +90,13 @@ namespace Editor
         {
             foreach (var go in Selection.gameObjects)
             {
-                var prefabMode = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
-                if (prefabMode)
-                {
-                    var data = new PrefabObject(prefabMode.assetPath, GetPath(go));
-                    group.prefabObjects.Add(data);
-                    continue;
-                }
+                //var prefabMode = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+                //if (prefabMode)
+                //{
+                //    var data = new PrefabObject(prefabMode.assetPath, GetPath(go));
+                //    group.prefabObjects.Add(data);
+                //    continue;
+                //}
                 
                 group.objects.Add(go);
             }

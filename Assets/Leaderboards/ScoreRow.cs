@@ -18,7 +18,7 @@ namespace Leaderboards
             FlagManager.SetFlag(flag, locale);
             
             var languages = new[] { "gb", "fi", "fr", "de", "es", "nl" };
-            var first = level.Split(",").First();
+            var first = level.Split(',').First();
             FlagManager.SetFlag(langFlag, languages[int.Parse(first) - 11]);
         }
     }

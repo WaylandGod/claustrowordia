@@ -96,14 +96,14 @@ namespace AnttiStarterKit.Animations
 		}
 
 		public void MoveTo(Transform obj, Vector3 target, float duration, float delay, System.Func<float, float> ease = null, int easeIndex = -1, bool removeOld = true) {
-			ease ??= TweenEasings.LinearInterpolation;
+			if(ease == null) ease = TweenEasings.LinearInterpolation;
 			var act = AddTween (obj, target, TweenAction.Type.Position, duration, delay, ease, easeIndex, removeOld);
 			act.startPos = act.theObject.position;
 			StartCoroutine(act.SetStartPos());
 		}
 
 		public void MoveLocalTo(Transform obj, Vector3 target, float duration, float delay, System.Func<float, float> ease = null, int easeIndex = -1, bool removeOld = true) {
-			ease ??= TweenEasings.LinearInterpolation;
+			if (ease == null) ease = TweenEasings.LinearInterpolation;
 			var act = AddTween (obj, target, TweenAction.Type.LocalPosition, duration, delay, ease, easeIndex, removeOld);
 			act.startPos = act.theObject.localPosition;
 			StartCoroutine(act.SetStartLocalPos());
@@ -135,7 +135,7 @@ namespace AnttiStarterKit.Animations
 		}
 
 		public void RotateTo(Transform obj, Quaternion rotation, float duration, float delay, System.Func<float, float> ease = null, int easeIndex = -1, bool removeOld = true) {
-			ease ??= TweenEasings.LinearInterpolation;
+			if (ease == null) ease = TweenEasings.LinearInterpolation;
 			var act = AddTween (obj, Vector3.zero, TweenAction.Type.Rotation, duration, delay, ease, easeIndex, removeOld);
 			act.startRot = act.theObject.rotation;
 			act.targetRot = rotation;
@@ -158,7 +158,7 @@ namespace AnttiStarterKit.Animations
 		}
 
 		public void ScaleTo(Transform obj, Vector3 target, float duration, float delay, System.Func<float, float> ease = null, int easeIndex = -1, bool removeOld = true) {
-			ease ??= TweenEasings.LinearInterpolation;
+			if (ease == null) ease = TweenEasings.LinearInterpolation;
 			var act = AddTween (obj, target, TweenAction.Type.Scale, duration, delay, ease, easeIndex, removeOld);
 			StartCoroutine(act.SetStartScale());
 		}
@@ -174,7 +174,7 @@ namespace AnttiStarterKit.Animations
 		}
 
 		public void ColorTo(SpriteRenderer obj, Color color, float duration, float delay, System.Func<float, float> ease = null, int easeIndex = -1, bool removeOld = true) {
-			ease ??= TweenEasings.LinearInterpolation;
+			if (ease == null) ease = TweenEasings.LinearInterpolation;
 			var act = AddTween (obj.transform, Vector3.zero, TweenAction.Type.Color, duration, delay, ease, easeIndex, removeOld);
 			act.sprite = obj;
 			act.startColor = act.sprite.color;

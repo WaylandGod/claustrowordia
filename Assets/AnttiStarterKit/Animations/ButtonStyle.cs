@@ -23,8 +23,8 @@ namespace AnttiStarterKit.Animations
 
         [SerializeField] private bool doColors;
     
-        [SerializeField] private List<Color> backColors = new() { Color.black };
-        [SerializeField] private List<Color> frontColors = new() { Color.white };
+        [SerializeField] private List<Color> backColors = new List<Color>() { Color.black };
+        [SerializeField] private List<Color> frontColors = new List<Color>() { Color.white };
 
         [SerializeField] private int clickSound = -1, hoverSound = -1;
         [SerializeField] private float clickVolume = 1f, hoverVolume = 1f;

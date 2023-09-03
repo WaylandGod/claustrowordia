@@ -14,7 +14,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private Field field;
     [SerializeField] private Transform dropPreview;
 
-    private List<Card> cards = new();
+    private List<Card> cards = new List<Card>();
     private Card held;
     private int prevIndex = -1;
 

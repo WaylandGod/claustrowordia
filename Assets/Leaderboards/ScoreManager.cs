@@ -106,7 +106,7 @@ namespace Leaderboards
 		}
 
 		public void SubmitScore(string entryName, long scoreSub, long levelSub, string id) {
-			var check = (int)Secrets.GetVerificationNumber(entryName, scoreSub, levelSub);
+			var check = 0;// (int)Secrets.GetVerificationNumber(entryName, scoreSub, levelSub);
 			
 			var parameters = "";
 			parameters += entryName;
